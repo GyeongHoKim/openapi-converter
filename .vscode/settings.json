@@ -1,0 +1,28 @@
+{
+	// Format on save
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "biomejs.biome",
+
+	// Biome specific settings
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+
+	// Code actions on save (organize imports)
+	"editor.codeActionsOnSave": {
+		"source.fixAll.biome": "explicit"
+	},
+
+	// Disable other formatters to avoid conflicts
+	"prettier.enable": false,
+	"eslint.enable": false
+}

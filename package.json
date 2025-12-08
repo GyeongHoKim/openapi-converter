@@ -1,0 +1,53 @@
+{
+	"name": "@gyeonghokim/openapi-converter",
+	"version": "0.0.0-development",
+	"description": "Convert API collection files (Postman, Apidog, Bruno) to OpenAPI v3 format",
+	"type": "module",
+	"main": "dist/index.js",
+	"bin": {
+		"openapi-converter": "dist/cli.js"
+	},
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsc --watch",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:ui": "vitest --ui",
+		"test:coverage": "vitest run --coverage",
+		"format": "biome format --write .",
+		"lint": "biome lint .",
+		"check": "biome check --write .",
+		"prepare": "husky"
+	},
+	"keywords": [
+		"openapi",
+		"postman",
+		"apidog",
+		"bruno",
+		"converter",
+		"cli"
+	],
+	"author": "",
+	"license": "MIT",
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.8",
+		"@commitlint/cli": "^20.2.0",
+		"@commitlint/config-conventional": "^20.2.0",
+		"@types/node": "^24.10.1",
+		"@vitest/coverage-v8": "^4.0.15",
+		"@vitest/ui": "^4.0.15",
+		"biome": "^0.3.3",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7",
+		"typescript": "^5.9.3",
+		"vitest": "^4.0.15"
+	},
+	"lint-staged": {
+		"*.{ts,js,json}": [
+			"biome check --write --no-errors-on-unmatched"
+		]
+	}
+}

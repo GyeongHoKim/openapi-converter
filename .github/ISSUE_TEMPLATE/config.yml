@@ -1,0 +1,6 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/gyeonghokim/openapi-converter#readme
+    about: Please check the README and documentation before opening an issue.
+
