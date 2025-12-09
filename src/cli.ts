@@ -1,49 +1,38 @@
 #!/usr/bin/env node
+import meow from "meow";
+import { exit } from "process";
+import { createConverter } from "./converter/factory.js";
 
-import { parseArgs } from "node:util";
-import { convertToOpenAPI } from "./index.js";
+const cli = meow(
+	`
+	Usage
+		$ oac
+		$ openapi-converter
 
-const { values, positionals } = parseArgs({
-	options: {
-		output: {
-			type: "string",
-			short: "o",
-			description: "Output file path for the OpenAPI specification",
-		},
-		help: {
-			type: "boolean",
-			short: "h",
-			description: "Show help message",
+	Options:
+		-o, --output <path>        Output file path
+		-p, --provider <provider>  Provider to use
+		-h, --help                 Show help message
+	`,
+	{
+		importMeta: import.meta,
+		flags: {
+			output: {
+				type: "string",
+				shortFlag: "o",
+			},
+			provider: {
+				type: "string",
+				shortFlag: "p",
+			},
 		},
 	},
-	allowPositionals: true,
-});
+);
 
-if (values.help || positionals.length === 0) {
-	console.log(`
-Usage: openapi-converter [options] <input-file>
-
-Convert API collection files to OpenAPI v3 format
-
-Options:
-  -o, --output <path>    Output file path (default: openapi.json)
-  -h, --help             Show this help message
-
-Supported formats:
-  - Postman Collection (v2.1)
-  - Apidog Collection
-  - Bruno Collection
-`);
-	process.exit(values.help ? 0 : 1);
+const converter = createConverter(cli.flags);
+const inputPath = cli.input.at(0);
+if (!inputPath) {
+	console.error("There is no input path");
+	exit(1);
 }
-
-const inputFile = positionals[0];
-const outputFile = values.output || "openapi.json";
-
-try {
-	await convertToOpenAPI(inputFile, outputFile);
-	console.log(`✓ Successfully converted to ${outputFile}`);
-} catch (error) {
-	console.error("Error:", error instanceof Error ? error.message : error);
-	process.exit(1);
-}
+converter.convert(inputPath);
