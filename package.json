@@ -49,5 +49,9 @@
 		"*.{ts,js,json}": [
 			"biome check --write --no-errors-on-unmatched"
 		]
+	},
+	"dependencies": {
+		"meow": "^14.0.0",
+		"postman2openapi": "^1.2.1"
 	}
 }
