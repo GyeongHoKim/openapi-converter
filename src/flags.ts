@@ -3,7 +3,7 @@ import { ValidationError } from "./errors/validation.js";
 
 const flags = z.object({
 	output: z.string().optional(),
-	provider: z.string().optional(),
+	provider: z.enum(["postman", "apidog", "bruno"]).optional(),
 });
 
 export type Flags = z.infer<typeof flags>;
