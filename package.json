@@ -5,7 +5,8 @@
 	"type": "module",
 	"main": "dist/index.js",
 	"bin": {
-		"openapi-converter": "dist/cli.js"
+		"openapi-converter": "dist/cli.js",
+		"oac": "dist/cli.js"
 	},
 	"scripts": {
 		"build": "tsc",
@@ -33,6 +34,7 @@
 		"node": ">=18.0.0"
 	},
 	"devDependencies": {
+		"@apidevtools/swagger-parser": "^12.1.0",
 		"@biomejs/biome": "^2.3.8",
 		"@commitlint/cli": "^20.2.0",
 		"@commitlint/config-conventional": "^20.2.0",
@@ -52,6 +54,7 @@
 	},
 	"dependencies": {
 		"meow": "^14.0.0",
-		"postman2openapi": "^1.2.1"
+		"postman2openapi": "^1.2.1",
+		"zod": "^4.1.13"
 	}
 }

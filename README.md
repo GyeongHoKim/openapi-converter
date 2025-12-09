@@ -23,12 +23,14 @@ npm install --save-dev @gyeonghokim/openapi-converter
 ## Usage
 
 ```bash
-openapi-converter [options] <input-file>
+openapi-converter <input-file> [options]
+# or just
+oac <input-file> [options]
 
 Options:
-  -o, --output <path>    Output file path (default: openapi.json, only supports json and yaml formats)
-  -h, --help             Show help message
-  -p, --provider <provider>    Provider to use (default: postman, only supports postman, apidog, bruno)
+  -o, --output <path>       Output file path (default: openapi.json, only supports json and yaml formats)
+  -p, --provider <provider> Provider to use (default: postman, only supports postman, apidog, bruno)
+  -h, --help                Show help message
 ```
 
 ### Examples
