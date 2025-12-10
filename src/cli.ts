@@ -7,8 +7,8 @@ import { type Flags, validateFlags } from "./flags.js";
 const cli = meow(
 	`
 	Usage
-		$ oac
-		$ openapi-converter
+		$ oac <input-path> [options]
+		$ openapi-converter <input-path> [options]
 
 	Options:
 		-o, --output <path>        Output file path
