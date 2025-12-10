@@ -1,0 +1,6 @@
+.devcontainer
+.github
+.husky
+.vscode
+node_modules
+src
