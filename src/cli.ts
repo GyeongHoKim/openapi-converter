@@ -2,6 +2,7 @@
 import meow from "meow";
 import { exit } from "process";
 import { createConverter } from "./converter/factory.js";
+import { type Flags, validateFlags } from "./flags.js";
 
 const cli = meow(
 	`
@@ -29,10 +30,19 @@ const cli = meow(
 	},
 );
 
-const converter = createConverter(cli.flags);
+let flags: Flags;
+try {
+	flags = validateFlags(cli.flags);
+} catch (e) {
+	console.error(e);
+	exit(1);
+}
+
+const converter = createConverter(flags);
 const inputPath = cli.input.at(0);
 if (!inputPath) {
 	console.error("There is no input path");
 	exit(1);
 }
+
 converter.convert(inputPath);
