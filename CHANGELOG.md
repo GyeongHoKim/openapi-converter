@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/GyeongHoKim/openapi-converter/compare/v1.0.0...v1.0.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* trigger release ([cedc448](https://github.com/GyeongHoKim/openapi-converter/commit/cedc448ada57bdf5a3ca05c03e3f84485e753f62))
+
 # 1.0.0 (2025-12-10)
 
 
