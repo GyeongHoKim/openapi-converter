@@ -5,5 +5,5 @@ export abstract class Converter {
 		protected readonly outputPath: string,
 		protected readonly fileHandler: FileHandler,
 	) {}
-	abstract convert(input: string): never;
+	abstract convert(input: string): void;
 }
