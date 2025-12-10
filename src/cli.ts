@@ -45,4 +45,11 @@ if (!inputPath) {
 	exit(1);
 }
 
-converter.convert(inputPath);
+try {
+	converter.convert(inputPath);
+} catch (e) {
+	console.error(e);
+	exit(1);
+}
+
+exit(0);
