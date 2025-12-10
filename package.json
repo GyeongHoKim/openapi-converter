@@ -1,6 +1,6 @@
 {
 	"name": "@gyeonghokim/openapi-converter",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"private": false,
 	"description": "Convert API collection files (Postman, Apidog, Bruno) to OpenAPI v3 format",
 	"type": "module",
