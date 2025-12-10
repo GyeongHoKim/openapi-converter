@@ -6,9 +6,20 @@ const flags = z.object({
 	provider: z.enum(["postman", "apidog", "bruno"]).optional(),
 });
 
+const supportedProviders = ["postman", "apidog", "bruno"] as const;
+const supportedExtensions = ["json", "yml", "yaml"] as const;
+export type ProviderFlag = (typeof supportedProviders)[number];
+export type SupportedExtension = (typeof supportedExtensions)[number];
 export type Flags = {
 	output: string;
-	provider: string;
+	provider: ProviderFlag;
+};
+
+const isSupportedExtesion = (ext: unknown): ext is SupportedExtension => {
+	if (typeof ext !== "string") {
+		return false;
+	}
+	return ["json", "yml", "yaml"].includes(ext);
 };
 
 const DEFAULT_OUTPUT = "./openapi.json";
@@ -19,9 +30,21 @@ export const validateFlags = (input: unknown): Flags => {
 	if (result.error) {
 		throw new ValidationError(z.prettifyError(result.error));
 	}
-	const { output, provider } = result.data;
+	let { output, provider } = result.data;
+	output ??= DEFAULT_OUTPUT;
+	provider ??= DEFAULT_PROVIDER;
+
+	if (!output.includes(".")) {
+		throw new ValidationError("Unsupported extension");
+	}
+
+	const chunks = output.split(".");
+	if (!isSupportedExtesion(chunks[chunks.length - 1])) {
+		throw new ValidationError("Unsupported extension");
+	}
+
 	return {
-		output: output ?? DEFAULT_OUTPUT,
-		provider: provider ?? DEFAULT_PROVIDER,
+		output,
+		provider,
 	};
 };
