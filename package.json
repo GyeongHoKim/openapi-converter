@@ -1,12 +1,21 @@
 {
 	"name": "@gyeonghokim/openapi-converter",
-	"version": "0.0.0-development",
+	"version": "0.0.0",
+	"private": false,
 	"description": "Convert API collection files (Postman, Apidog, Bruno) to OpenAPI v3 format",
 	"type": "module",
 	"main": "dist/index.js",
 	"bin": {
 		"openapi-converter": "dist/cli.js",
 		"oac": "dist/cli.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:GyeongHoKim/openapi-converter.git"
+	},
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org",
+		"access": "public"
 	},
 	"scripts": {
 		"build": "tsc",
@@ -28,7 +37,7 @@
 		"converter",
 		"cli"
 	],
-	"author": "",
+	"author": "GyeongHo Kim",
 	"license": "MIT",
 	"engines": {
 		"node": ">=18.0.0"
