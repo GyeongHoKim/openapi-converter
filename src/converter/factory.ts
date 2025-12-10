@@ -7,12 +7,9 @@ import type { Converter } from "./converter.js";
 import { PostmanConverter } from "./postman-converter.js";
 
 export const createConverter = (flags: Flags): Converter => {
-	const provider = flags.provider?.toLowerCase();
-	const outputPath = flags?.output ?? "./openapi.json";
+	const provider = flags.provider.toLowerCase();
+	const outputPath = flags.output;
 	const fileHandler = new FSFileHandler();
-	if (!provider) {
-		return new PostmanConverter(outputPath, fileHandler);
-	}
 	switch (provider) {
 		case "postman":
 			return new PostmanConverter(outputPath, fileHandler);
