@@ -48,10 +48,26 @@ describe("valid flags", () => {
 });
 
 describe("invalid flags", () => {
-	it("should throw ValidationError with not supported provider", () => {
+	it("should throw ValidationError with unsupported provider", () => {
 		const notSupportedProvider = "something-special";
 		const flags = {
 			provider: notSupportedProvider,
+		} as unknown;
+		expect(() => validateFlags(flags)).toThrow(ValidationError);
+	});
+
+	it("should throw ValidationError with unsported extension", () => {
+		const unSupportedOutput = "./openapi.md";
+		const flags = {
+			output: unSupportedOutput,
+		} as unknown;
+		expect(() => validateFlags(flags)).toThrow(ValidationError);
+	});
+
+	it("should throw ValidationError with no extension", () => {
+		const noExtensionOutput = "json";
+		const flags = {
+			output: noExtensionOutput,
 		} as unknown;
 		expect(() => validateFlags(flags)).toThrow(ValidationError);
 	});
