@@ -6,12 +6,22 @@ const flags = z.object({
 	provider: z.enum(["postman", "apidog", "bruno"]).optional(),
 });
 
-export type Flags = z.infer<typeof flags>;
+export type Flags = {
+	output: string;
+	provider: string;
+};
+
+const DEFAULT_OUTPUT = "./openapi.json";
+const DEFAULT_PROVIDER = "postman";
 
 export const validateFlags = (input: unknown): Flags => {
 	const result = flags.safeParse(input);
 	if (result.error) {
 		throw new ValidationError(z.prettifyError(result.error));
 	}
-	return result.data;
+	const { output, provider } = result.data;
+	return {
+		output: output ?? DEFAULT_OUTPUT,
+		provider: provider ?? DEFAULT_PROVIDER,
+	};
 };
