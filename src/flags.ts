@@ -15,7 +15,9 @@ export type Flags = {
 	provider: ProviderFlag;
 };
 
-const isSupportedExtesion = (ext: unknown): ext is SupportedExtension => {
+export const isSupportedExtesion = (
+	ext: unknown,
+): ext is SupportedExtension => {
 	if (typeof ext !== "string") {
 		return false;
 	}
