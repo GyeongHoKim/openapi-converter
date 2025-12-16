@@ -1,6 +1,6 @@
 #!/usr/bin/env node
+import { exit } from "node:process";
 import meow from "meow";
-import { exit } from "process";
 import { createConverter } from "./converter/factory.js";
 import { type Flags, validateFlags } from "./flags.js";
 

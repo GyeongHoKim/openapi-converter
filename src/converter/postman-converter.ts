@@ -6,6 +6,12 @@ import { isSupportedExtesion, type SupportedExtension } from "../flags.js";
 import type { FileHandler } from "../infrastructure/io.js";
 import { Converter } from "./converter.js";
 
+type OpenAPISpec = Record<string, unknown>;
+
+function isOpenAPISpec(value: unknown): value is OpenAPISpec {
+	return typeof value === "object" && value !== null;
+}
+
 export class PostmanConverter extends Converter {
 	private outputFileExtension: SupportedExtension;
 
@@ -20,12 +26,16 @@ export class PostmanConverter extends Converter {
 	}
 
 	convert(input: string): void {
-		const collectionString = this.fileHandler.readFile<string>(input);
+		const collectionString = this.fileHandler.readFile(input);
 		const collection = JSON.parse(collectionString);
-		let openapi: any;
+		let openapi: unknown;
 		try {
 			openapi = postman2openapi.transpile(collection);
-		} catch (e) {
+		} catch (_e) {
+			throw new ConvertError();
+		}
+
+		if (!isOpenAPISpec(openapi)) {
 			throw new ConvertError();
 		}
 		if (this.outputFileExtension === "json") {

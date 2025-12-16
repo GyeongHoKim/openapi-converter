@@ -2,9 +2,8 @@ import { readFileSync, writeFileSync } from "node:fs";
 import type { FileHandler } from "./io.js";
 
 export class FSFileHandler implements FileHandler {
-	readFile<T extends string | Buffer>(path: string): T {
-		const content = readFileSync(path, "utf-8");
-		return content as T;
+	readFile(path: string): string {
+		return readFileSync(path, "utf-8");
 	}
 
 	writeFile<T extends string | Buffer>(path: string, data: T): void {

@@ -1,4 +1,4 @@
 export interface FileHandler {
-	readFile<T extends string | Buffer>(path: string): T;
+	readFile(path: string): string;
 	writeFile<T extends string | Buffer>(path: string, data: T): void;
 }
