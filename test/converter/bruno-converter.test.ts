@@ -2,12 +2,12 @@ import { existsSync, readFileSync, unlinkSync } from "node:fs";
 import { join } from "node:path";
 import SwaggerParser from "@apidevtools/swagger-parser";
 import { afterEach, describe, expect, it } from "vitest";
-import { PostmanConverter } from "../../src/converter/postman-converter.js";
+import { BrunoConverter } from "../../src/converter/bruno-converter.js";
 import { FSFileHandler } from "../../src/infrastructure/file-handler.js";
 
-describe("PostmanConverter E2E", () => {
+describe("BrunoConverter E2E", () => {
 	const testDir = join(process.cwd(), "test/fixtures");
-	const inputFile = join(testDir, "postman_collection.json");
+	const inputDir = join(testDir, "bruno-collection");
 	const outputFileJson = join(testDir, "output-openapi.json");
 	const outputFileYaml = join(testDir, "output-openapi.yaml");
 
@@ -20,11 +20,11 @@ describe("PostmanConverter E2E", () => {
 		}
 	});
 
-	it("should convert postman collection to OpenAPI JSON and validate with swagger-parser", async () => {
+	it("should convert bruno collection to OpenAPI JSON and validate with swagger-parser", async () => {
 		const fileHandler = new FSFileHandler();
-		const converter = new PostmanConverter(outputFileJson, fileHandler);
+		const converter = new BrunoConverter(outputFileJson, fileHandler);
 
-		converter.convert(inputFile);
+		converter.convert(inputDir);
 
 		expect(existsSync(outputFileJson)).toBe(true);
 
@@ -36,11 +36,11 @@ describe("PostmanConverter E2E", () => {
 		expect("openapi" in validatedSpec || "swagger" in validatedSpec).toBe(true);
 	});
 
-	it("should convert postman collection to OpenAPI YAML and validate with swagger-parser", async () => {
+	it("should convert bruno collection to OpenAPI YAML and validate with swagger-parser", async () => {
 		const fileHandler = new FSFileHandler();
-		const converter = new PostmanConverter(outputFileYaml, fileHandler);
+		const converter = new BrunoConverter(outputFileYaml, fileHandler);
 
-		converter.convert(inputFile);
+		converter.convert(inputDir);
 
 		expect(existsSync(outputFileYaml)).toBe(true);
 
